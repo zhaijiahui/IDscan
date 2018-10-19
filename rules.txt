@@ -1,0 +1,13 @@
+/.svn/entries|dir|SVN信息泄露
+/.git/config|[core]|Git信息泄露
+/.DS_Store||DS_Store文件泄露
+/WEB-INF/web.xml|<?xml version=|初始化工程配置信息泄露
+/crossdomin.xml|cross-domain-policy|跨域策略文件
+/icons/|Index of|目录遍历路径
+/robots.txt|Disallow|爬虫配置文件
+:8080/manage||Jenkins未授权访问可执行命令
+:8080/script||Jenkins未授权访问可执行命令
+:9200/_cat/indices|_river|Elasticsearch未授权访问
+:9200/_river/_search|node|Elasticsearch未授权访问
+:5984/_config/|httpd_design_handlers|CouchDB未授权访问
+:2375/containers/json|[|Docker未授权访问
