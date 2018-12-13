@@ -29,7 +29,7 @@ def request(ip):
 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_2_1 like Mac OS X) AppleWebKit/602.4.6 (KHTML, like Gecko) Version/10.0 Mobile/14D27 Safari/602.1',
 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_2_1 like Mac OS X; zh-CN) AppleWebKit/537.51.1 (KHTML, like Gecko) Mobile/14D27 UCBrowser/11.6.1.1003 Mobile  AliApp(TUnionSDK/0.1.20)']
     headers = { 'User-Agent': headers_list[random.randint(0,4)] }
-    f = open('rules.txt','r')
+    f = open('rules.txt','r',encoding='utf-8')
     txt = f.readlines()
     for x in txt:
         u,j,w = x.split('|')
@@ -57,11 +57,11 @@ def request(ip):
 def main():
     print('*'*35+'''\nIDscan V1.0 By Zhaijiahui\n
 Information disclosure Check.\n'''+'*'*35)
-    with open('url_list.txt','r') as f:
-        url_list = f.readlines()
+    with open('url_list.txt','r',encoding='utf-8') as f:
+        url_l = f.readlines()
     pool = threadpool.ThreadPool(255)
     ipl = []
-    for i in url_list:
+    for i in url_l:
         if 'http' in i: # website url
             temp = i.split('://')
             ipl.append(temp[1].strip())
@@ -72,7 +72,6 @@ Information disclosure Check.\n'''+'*'*35)
             ipl.append(i.strip())
         else:
             print('Unknown form IP：'+i)
-    # print(ipl)
     print('Start...')
     requests = threadpool.makeRequests(request, ipl)
     [pool.putRequest(req) for req in requests]

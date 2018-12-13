@@ -11,3 +11,4 @@
 :9200/_river/_search|node|Elasticsearch未授权访问
 :5984/_config/|httpd_design_handlers|CouchDB未授权访问
 :2375/containers/json|[|Docker未授权访问
+:8161/admin/||ActiveMQ未授权访问
