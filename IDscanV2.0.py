@@ -55,7 +55,7 @@ def request(ip):
     
 
 def main():
-    print('*'*35+'''\nIDscan V1.0 By Zhaijiahui\n
+    print('*'*35+'''\nIDscan V2.0 By Zhaijiahui\n
 Information disclosure Check.\n'''+'*'*35)
     with open('url_list.txt','r',encoding='utf-8') as f:
         url_l = f.readlines()
@@ -67,12 +67,13 @@ Information disclosure Check.\n'''+'*'*35)
             ipl.append(temp[1].strip())
         elif '-' in i: # network segment
             start_ip,end_ip = i.split('-')
-            ipl = get_ip_list.iplist(start_ip,end_ip)
+            ipl.extend(get_ip_list.iplist(start_ip,end_ip))
         elif checkip(i):
             ipl.append(i.strip())
         else:
             print('Unknown form IP：'+i)
     print('Start...')
+    print(ipl)
     requests = threadpool.makeRequests(request, ipl)
     [pool.putRequest(req) for req in requests]
     pool.wait()

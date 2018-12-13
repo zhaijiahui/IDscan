@@ -83,6 +83,15 @@ http://www.baidu.com:81
 
 
 
+## BUG
+
+\# 1 修复读取文件编码错误
+
+
+
+
+
+
 ## Gratitude
 
 - JingYi
