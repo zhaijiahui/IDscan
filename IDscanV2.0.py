@@ -64,7 +64,8 @@ Information disclosure Check.\n'''+'*'*35)
     for i in url_l:
         if 'http' in i: # website url
             temp = i.split('://')
-            ipl.append(temp[1].strip())
+            url_temp = temp[1].strip('/')
+            ipl.append(url_temp.strip())
         elif '-' in i: # network segment
             start_ip,end_ip = i.split('-')
             ipl.extend(get_ip_list.iplist(start_ip,end_ip))
@@ -73,7 +74,7 @@ Information disclosure Check.\n'''+'*'*35)
         else:
             print('Unknown form IP：'+i)
     print('Start...')
-    print(ipl)
+    # print(ipl)
     requests = threadpool.makeRequests(request, ipl)
     [pool.putRequest(req) for req in requests]
     pool.wait()
