@@ -1,17 +1,18 @@
 # -*- coding=utf-8 -*-
+
 # Author:Zhaijiahui
+# description: Small vulnerability scanner AND No interaction vulnerability type for attack and page
+# date: 2019/1/4
 # https://github.com/zhaijiahui/collect_self_script/tree/master/Information_Disclosure
 
 import requests
-import re,os,sys,time
-import random
+import re,os,sys,time,random
 import threadpool
 import get_ip_list
 
 from requests.packages.urllib3.exceptions import InsecureRequestWarning,InsecurePlatformWarning   # 屏蔽错误提示的一般方法，配合下面两个disable
 import requests.packages.urllib3.util.ssl_                   # 解决部分ssl证书版本不正确的问题
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ALL'
-
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning) # 移除ssl错误告警
 requests.packages.urllib3.disable_warnings(InsecurePlatformWarning)
 
@@ -34,7 +35,7 @@ def request(ip):
     for x in txt:
         u,j,w = x.split('|')
         try:
-            r = requests.get('http://'+ ip + u,headers=headers,timeout=3,verify=False)
+            r = requests.get('http://'+ ip + u,headers=headers,timeout=3,verify=False) # http
             html = r.text
             if r.status_code == 200:
                 if j in html:
@@ -43,7 +44,7 @@ def request(ip):
                     print('Find: ' + 'http://'+ip + u +' is Exist !!!')
         except Exception as e:
             try:
-                r = requests.get('https://'+ ip + u,headers=headers,timeout=3,verify=False)
+                r = requests.get('https://'+ ip + u,headers=headers,timeout=3,verify=False) # https
                 html = r.text
                 if r.status_code == 200:
                     if j in html:
@@ -55,7 +56,7 @@ def request(ip):
     
 
 def main():
-    print('*'*35+'''\nIDscan V2.0 By Zhaijiahui\n
+    print('*'*35+'''\nIDscan V2.1 By Zhaijiahui\n
 Information disclosure Check.\n'''+'*'*35)
     with open('url_list.txt','r',encoding='utf-8') as f:
         url_l = f.readlines()

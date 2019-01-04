@@ -1,4 +1,4 @@
-# IDscan V2.0
+# IDscan V2.1
 
 
 
@@ -66,20 +66,24 @@ http://www.baidu.com:81
 
 ## Support
 
+
+
 | Type             | Explanation        | Exp                                      |
 | ---------------- | ------------------ | ---------------------------------------- |
-| /.svn/entries    | SVN信息泄露        | Seay-Svn源代码泄露漏洞利用工具           |
+| /.svn/entries    | SVN信息泄露        | Seay-Svn源代码泄露漏洞利用工具   |
 | /.git/config     | Git信息泄露        | https://github.com/lijiejie/GitHack      |
 | /.DS_Store       | DS_Store文件泄露   | https://github.com/lijiejie/ds_store_exp |
-| /WEB-INF/web.xml | 初始化工程配置信息泄露 |                                          |
-| /crossdomin.xml  | 跨域策略文件       |                                          |
-| /icons/          | 目录遍历路径       |                                          |
-| /robots.txt      | 爬虫配置文件           |                                          |
+| /WEB-INF/web.xml | 初始化工程配置信息泄露 |   |
+| /crossdomin.xml  | 跨域策略文件       |     |
+| /icons/          | 目录遍历路径       |       |
+| /robots.txt      | 爬虫配置文件           |                    |
+| /uddiexplorer/SearchPublicRegistries.jsp|Weblogic 服务器请求伪造漏洞||
+| /ws_utc/config.do|Oracle WebLogic ws-utc 任意文件上传漏洞||
 | :8080/manage\|/:8080/script | Jenkins未授权访问可执行命令 | |
 | :9200/_cat/indices\|:9200/\_river/_search | Elasticsearch未授权访问 | |
 | :5984/_config/ | CouchDB未授权访问 | |
 | :2375/containers/json | Docker未授权访问 | |
-| ...              | ...                |                                          |
+| ...              | ...                |     |
 
 
 
@@ -93,6 +97,10 @@ http://www.baidu.com:81
 \# 2
 
 + 添加的网站存在斜杠去除
+
+\# 3
+
++ 添加weblogic两个未授权访问
 
 
 

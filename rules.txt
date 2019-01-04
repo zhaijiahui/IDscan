@@ -5,6 +5,8 @@
 /crossdomin.xml|cross-domain-policy|跨域策略文件
 /icons/|Index of|目录遍历路径
 /robots.txt|Disallow|爬虫配置文件
+/uddiexplorer/SearchPublicRegistries.jsp|Search public registries|Weblogic 服务器请求伪造漏洞
+/ws_utc/config.do|tc_container|Oracle WebLogic ws-utc 任意文件上传漏洞
 :8080/manage||Jenkins未授权访问可执行命令
 :8080/script||Jenkins未授权访问可执行命令
 :9200/_cat/indices|_river|Elasticsearch未授权访问
