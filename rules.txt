@@ -1,7 +1,13 @@
 /.svn/entries|dir|SVN信息泄露
 /.git/config|[core]|Git信息泄露
+/.git/config|repositoryformatversion|Git信息泄露
+/CVS/Root||cvs信息泄露
+/CVS/Entries||cvs信息泄露
+/.hg/||.hg源码泄漏
+/.bzr/||.bzr信息泄露
 /.DS_Store||DS_Store文件泄露
 /WEB-INF/web.xml|<?xml version=|初始化工程配置信息泄露
+/WEB-INF/web.xml|<web-app|初始化工程配置信息泄露
 /crossdomin.xml|cross-domain-policy|跨域策略文件
 /icons/|Index of|目录遍历路径
 /robots.txt|Disallow|爬虫配置文件
@@ -14,3 +20,20 @@
 :5984/_config/|httpd_design_handlers|CouchDB未授权访问
 :2375/containers/json|[|Docker未授权访问
 :8161/admin/||ActiveMQ未授权访问
+/test.php||测试页面
+/test.cgi||测试页面
+/info.php||测试页面
+/login.php||管理后台地址泄露
+/admin.php||管理后台地址泄露
+/manager.php||管理后台地址泄露
+/admin_login.php||管理后台地址泄露
+/.test.php.swp||编辑器备份文件泄露
+/test.php.bak||编辑器备份文件泄露
+/test.jsp.old||编辑器备份文件泄露
+/cgi~||编辑器备份文件泄露
+/phpmyadmin||phpmyadmin后台泄露
+/phpinfo.php||phpinfo页面泄露
+/basic/index.php||HTTP认证泄露漏洞
+/www.rar||网站备份文件
+/web.zip||网站备份文件
+/sitename.tar.gz||网站备份文件

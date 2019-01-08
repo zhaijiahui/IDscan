@@ -23,40 +23,44 @@ def checkip(ip): # match ip
     else:
         return False
 
-def request(ip):
-    headers_list = ['Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
-'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0',
-'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16',
-'Mozilla/5.0 (iPhone; CPU iPhone OS 10_2_1 like Mac OS X) AppleWebKit/602.4.6 (KHTML, like Gecko) Version/10.0 Mobile/14D27 Safari/602.1',
-'Mozilla/5.0 (iPhone; CPU iPhone OS 10_2_1 like Mac OS X; zh-CN) AppleWebKit/537.51.1 (KHTML, like Gecko) Mobile/14D27 UCBrowser/11.6.1.1003 Mobile  AliApp(TUnionSDK/0.1.20)']
-    headers = { 'User-Agent': headers_list[random.randint(0,4)] }
+def httpd(u,j,w,way):
+    r = requests.get(way + ip + u,headers=headers,timeout=3,verify=False) # http
+    html = r.text
+    if r.status_code == 200:
+        if j in html:
+            print('Find: ' + way +ip + u +' is Leak !!! Leak is '+ w)
+        else:
+            print('Find: ' + way +ip + u +' is Exist !!!')
+
+def verify(ip):
+    headers_list = [
+    'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0',
+    'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16',
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 10_2_1 like Mac OS X) AppleWebKit/602.4.6 (KHTML, like Gecko) Version/10.0 Mobile/14D27 Safari/602.1',
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 10_2_1 like Mac OS X; zh-CN) AppleWebKit/537.51.1 (KHTML, like Gecko) Mobile/14D27 UCBrowser/11.6.1.1003 Mobile  AliApp(TUnionSDK/0.1.20)',
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3",
+    "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24",
+    "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
+    ]
+    headers = { 'User-Agent': random.choice(headers_list) }
     f = open('rules.txt','r',encoding='utf-8')
     txt = f.readlines()
     for x in txt:
         u,j,w = x.split('|')
         try:
-            r = requests.get('http://'+ ip + u,headers=headers,timeout=3,verify=False) # http
-            html = r.text
-            if r.status_code == 200:
-                if j in html:
-                    print('Find: ' + 'http://'+ip + u +' is Leak !!! Leak is '+ w)
-                else:
-                    print('Find: ' + 'http://'+ip + u +' is Exist !!!')
+            httpd(ip,u,j,w,way='http://')
         except Exception as e:
             try:
-                r = requests.get('https://'+ ip + u,headers=headers,timeout=3,verify=False) # https
-                html = r.text
-                if r.status_code == 200:
-                    if j in html:
-                        print('Find: ' + 'https://'+ip + u +' is Leak !!! Leak is '+ w)
-                    else:
-                        print('Find: ' + 'https://'+ip + u +' is Exist !!!')
+                httpd(ip,u,j,w,way='https://')
             except Exception as e:
                 pass
     
 
 def main():
-    print('*'*35+'''\nIDscan V2.1 By Zhaijiahui\n
+    print('*'*35+'''\nIDscan V2.2 By Zhaijiahui\n
 Information disclosure Check.\n'''+'*'*35)
     with open('url_list.txt','r',encoding='utf-8') as f:
         url_l = f.readlines()
@@ -76,7 +80,7 @@ Information disclosure Check.\n'''+'*'*35)
             print('Unknown form IP：'+i)
     print('Start...')
     # print(ipl)
-    requests = threadpool.makeRequests(request, ipl)
+    requests = threadpool.makeRequests(verify, ipl)
     [pool.putRequest(req) for req in requests]
     pool.wait()
 

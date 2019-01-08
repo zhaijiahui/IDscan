@@ -70,9 +70,13 @@ http://www.baidu.com:81
 
 | Type             | Explanation        | Exp                                      |
 | ---------------- | ------------------ | ---------------------------------------- |
-| /.svn/entries    | SVN信息泄露        | Seay-Svn源代码泄露漏洞利用工具   |
-| /.git/config     | Git信息泄露        | https://github.com/lijiejie/GitHack      |
-| /.DS_Store       | DS_Store文件泄露   | https://github.com/lijiejie/ds_store_exp |
+| /.svn/entries| SVN信息泄露       | Seay-Svn源代码泄露漏洞利用工具   |
+| /.git/config | Git信息泄露       | https://github.com/lijiejie/GitHack |
+| /.DS_Store | DS_Store文件泄露   | https://github.com/lijiejie/ds_store_exp |
+| /.hg/ | .hg源码泄漏 | https://github.com/kost/dvcs-ripper/blob/master/rip-hg.pl |
+| /.bzr/|.bzr信息泄露|https://github.com/kost/dvcs-ripper/blob/master/rip-bzr.pl|
+| /.bzr/|.bzr信息泄露|https://github.com/kost/dvcs-ripper/blob/master/rip-bzr.pl|
+| /CVS/Entries|cvs信息泄露|https://github.com/kost/dvcs-ripper/blob/master/rip-cvs.pl|
 | /WEB-INF/web.xml | 初始化工程配置信息泄露 |   |
 | /crossdomin.xml  | 跨域策略文件       |     |
 | /icons/          | 目录遍历路径       |       |
@@ -83,25 +87,30 @@ http://www.baidu.com:81
 | :9200/_cat/indices\|:9200/\_river/_search | Elasticsearch未授权访问 | |
 | :5984/_config/ | CouchDB未授权访问 | |
 | :2375/containers/json | Docker未授权访问 | |
+|:8161/admin/\|ActiveMQ未授权访问|||
+|/test.cgi\|/test.php\|/info.php|测试页面||
+|/login.php\|/admin.php\|/manager.php\|/admin_login.php|管理后台地址泄露||
+|/.test.php.swp\|/test.php.bak\|/test.jsp.old\|/cgi~|编辑器备份文件泄露||
+|/phpmyadmin|phpmyadmin后台泄露||
+|/phpinfo.php|phpinfo页面泄露||
+|/basic/index.php|HTTP认证泄露漏洞||
+|/www.rar |/web.zip|/sitename.tar.gz|网站备份文件||
 | ...              | ...                |     |
 
 
 
 ## BUG
 
-\# 1
+\# 1-3
 
 + 修复读取文件编码错误
 + 修复批量读取文件问题
-
-\# 2
-
 + 添加的网站存在斜杠去除
-
-\# 3
-
 + 添加weblogic两个未授权访问
 
+\# 4
+
++ 添加多个信息泄露问题，并精简代码
 
 
 
