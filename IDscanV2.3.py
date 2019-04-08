@@ -2,7 +2,7 @@
 
 # Author:Zhaijiahui
 # description: Small vulnerability scanner AND No interaction vulnerability type for attack and page
-# date: 2019/1/4
+# date: 2019/1/4 - 2019/4/8
 # https://github.com/zhaijiahui/collect_self_script/tree/master/Information_Disclosure
 
 import requests
@@ -49,7 +49,7 @@ def verify(ip):
     f = open('rules.txt','r',encoding='utf-8')
     txt = f.readlines()
     for x in txt:
-        u,j,w = x.split('|')
+        u,j,w = x.strip().split('|')
         try:
             httpd(ip,u,j,w,way='http://')
         except Exception as e:
@@ -79,7 +79,7 @@ Information disclosure Check.\n'''+'*'*35)
         else:
             print('Unknown form IP：'+i)
     print('Start...')
-    # print(ipl)
+    
     requests = threadpool.makeRequests(verify, ipl)
     [pool.putRequest(req) for req in requests]
     pool.wait()

@@ -16,7 +16,7 @@
 /ws_utc/config.do|tc_container|Oracle WebLogic ws-utc 任意文件上传漏洞
 :8080/manage||Jenkins未授权访问可执行命令
 :8080/script||Jenkins未授权访问可执行命令
-:9200/|build_hashElasticsearch未授权访问
+:9200/||build_hashElasticsearch未授权访问
 :9200/_cat/indices|_river|Elasticsearch未授权访问
 :9200/_river/_search|node|Elasticsearch未授权访问
 :5984/_config/|httpd_design_handlers|CouchDB未授权访问
