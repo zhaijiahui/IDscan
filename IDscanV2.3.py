@@ -2,7 +2,7 @@
 
 # Author:Zhaijiahui
 # description: Small vulnerability scanner AND No interaction vulnerability type for attack and page
-# date: 2019/1/4 - 2019/4/8
+# date: 2019/1/4 - 2020/3/3
 # https://github.com/zhaijiahui/collect_self_script/tree/master/Information_Disclosure
 
 import requests
@@ -23,16 +23,7 @@ def checkip(ip): # match ip
     else:
         return False
 
-def httpd(u,j,w,way):
-    r = requests.get(way + ip + u,headers=headers,timeout=3,verify=False) # http
-    html = r.text
-    if r.status_code == 200:
-        if j in html:
-            print('Find: ' + way +ip + u +' is Leak !!! Leak is '+ w)
-        else:
-            print('Find: ' + way +ip + u +' is Exist !!!')
-
-def verify(ip):
+def verify(target):
     headers_list = [
     'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0',
@@ -50,17 +41,23 @@ def verify(ip):
     txt = f.readlines()
     for x in txt:
         u,j,w = x.strip().split('|')
+        url = target + u
         try:
-            httpd(ip,u,j,w,way='http://')
+            # httpd(ip,u,j,w,way=) # requests
+            # def httpd(ip,u,j,w,way):
+            r = requests.get(url,headers=headers,timeout=3,verify=False) # http
+            html = r.text
+            if r.status_code == 200:
+                if j in html:
+                    print('Find: ' + url +' is Leak !!! Leak is '+ w)
+                else:
+                    print('Find: ' + url +' is Exist !!!')
         except Exception as e:
-            try:
-                httpd(ip,u,j,w,way='https://')
-            except Exception as e:
-                pass
+            pass
     
 
 def main():
-    print('*'*35+'''\nIDscan V2.2 By Zhaijiahui\n
+    print('*'*35+'''\nIDscan V3.0 By Zhaijh\n
 Information disclosure Check.\n'''+'*'*35)
     with open('url_list.txt','r',encoding='utf-8') as f:
         url_l = f.readlines()
@@ -68,9 +65,7 @@ Information disclosure Check.\n'''+'*'*35)
     ipl = []
     for i in url_l:
         if 'http' in i: # website url
-            temp = i.split('://')
-            url_temp = temp[1].strip('/')
-            ipl.append(url_temp.strip())
+            ipl.append(i.strip())
         elif '-' in i: # network segment
             start_ip,end_ip = i.split('-')
             ipl.extend(get_ip_list.iplist(start_ip,end_ip))
@@ -80,8 +75,8 @@ Information disclosure Check.\n'''+'*'*35)
             print('Unknown form IP：'+i)
     print('Start...')
     
-    requests = threadpool.makeRequests(verify, ipl)
-    [pool.putRequest(req) for req in requests]
+    rethr = threadpool.makeRequests(verify, ipl) # connect rules
+    [pool.putRequest(req) for req in rethr]
     pool.wait()
 
     print('End...')

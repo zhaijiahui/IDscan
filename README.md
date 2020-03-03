@@ -1,4 +1,4 @@
-# IDscan V2.3
+# IDscan V3.0
 
 
 
@@ -29,7 +29,6 @@ pip install requests threadpool
 		- Used to traverse the IP segment|用于遍历IP段
 	- IDscan.py
 		- threadpool
-		- http/https
 		- random User-Agent
 	- rules.txt
 		- leak rules
@@ -71,7 +70,7 @@ http://www.baidu.com:81
 | Type             | Explanation        | Exp                                      |
 | ---------------- | ------------------ | ---------------------------------------- |
 | /.svn/entries| SVN信息泄露       | Seay-Svn源代码泄露漏洞利用工具   |
-| /.git/config | Git信息泄露       | https://github.com/lijiejie/GitHack |
+| /.git/config | Git信息泄露       | https://github.com/BugScanTeam/GitHack |
 | /.DS_Store | DS_Store文件泄露   | https://github.com/lijiejie/ds_store_exp |
 | /.hg/ | .hg源码泄漏 | https://github.com/kost/dvcs-ripper/blob/master/rip-hg.pl |
 | /.bzr/|.bzr信息泄露|https://github.com/kost/dvcs-ripper/blob/master/rip-bzr.pl|
@@ -94,23 +93,34 @@ http://www.baidu.com:81
 |/phpmyadmin|phpmyadmin后台泄露||
 |/phpinfo.php|phpinfo页面泄露||
 |/basic/index.php|HTTP认证泄露漏洞||
-|/www.rar |/web.zip|/sitename.tar.gz|网站备份文件||
+|/www.rar\|/web.zip\|/sitename.tar.gz|网站备份文件||
+|/_vti_inf.html|Frontpage 信息泄漏||
+|/_vti_pvt/service.pwd|FrontPage pwd 文件可读||
+|/.bashrc|bashrc 信息泄漏||
+|/.bash_profile|profile 信息泄露||
+|/.zshrc|zsh 信息泄露||
 | ...              | ...                |     |
 
 
 
 ## BUG
 
-\# 1-3
+\# v2.1
 
 + 修复读取文件编码错误
 + 修复批量读取文件问题
 + 添加的网站存在斜杠去除
 + 添加weblogic两个未授权访问
 
-\# 4-5
+\# v2.3
 
 + 添加多个信息泄露问题，并精简代码
+
+\# v3.0
+
++ 修改了严重bug
++ 添加多个信息泄露问题，并精简代码
+
 
 
 
